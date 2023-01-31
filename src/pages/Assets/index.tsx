@@ -141,7 +141,7 @@ export const Assets: React.FC = () => {
                       height={250}
                       src={
                         item.image
-                          ? `http://localhost:3333/assetsPictures/${item.image}`
+                          ? `http://18.228.7.178:3333/assetsPictures/${item.image}`
                           : avatar
                       }
                     />

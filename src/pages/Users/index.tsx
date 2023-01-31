@@ -145,7 +145,7 @@ export const Users: React.FC = () => {
                   <Avatar
                     src={
                       item.avatar
-                        ? `http://localhost:3333/avatar/${item.avatar}`
+                        ? `http://18.228.7.178:3333/avatar/${item.avatar}`
                         : avatar
                     }
                   />
