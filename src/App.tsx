@@ -10,19 +10,13 @@ import { LoginRoutes } from './Routes';
 import { useNavigate } from 'react-router-dom';
 
 function App() {
-  const { token } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { loggedIn } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/login');
-    }
-  }, [token]);
   return (
     <AppContainer>
-      {!!token && <AppHeader />}
+      {!!loggedIn && <AppHeader />}
       <Space>
-        {!!token ? (
+        {!!loggedIn ? (
           <ContentContainer>
             <SideMenu />
             <PageContent />

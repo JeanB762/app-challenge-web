@@ -27,8 +27,6 @@ export const CreateAsset: React.FC = () => {
 
   const [fileList, setFileList] = useState<any>([]);
 
-
-
   useEffect(() => {
     if (location.state?.item) {
       form.setFieldsValue(location.state.item);
@@ -105,7 +103,7 @@ export const CreateAsset: React.FC = () => {
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    return;
   };
 
   return (

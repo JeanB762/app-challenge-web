@@ -29,7 +29,7 @@ export const AuthContext = createContext<IContextValues>({
 
 export const AuthProvider = ({ children }: IContextProps) => {
   const [user, setUser] = useState<IUserContext>({ email: '', name: '' });
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('@App:token'));
 
   const navigate = useNavigate();
 
@@ -39,8 +39,10 @@ export const AuthProvider = ({ children }: IContextProps) => {
       const storageToken = localStorage.getItem('@App:token');
       if (storageUser && storageToken) {
         setUser(JSON.parse(storageUser));
-        setToken(JSON.parse(storageToken));
+        setToken(storageToken);
         api.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+      } else {
+        navigate('/login');
       }
     };
     loadUser();
@@ -54,10 +56,9 @@ export const AuthProvider = ({ children }: IContextProps) => {
     } else {
       setUser(response.data.user);
       setToken(response.data.token);
-      api.defaults.headers.common[
-        'Authorization'
-      ] = `Bearer ${response.data.token}`;
-      localStorage.setItem('@App:token', JSON.stringify(response.data.token));
+      api.defaults.headers.common['Authorization'] =
+        'Bearer ' + response.data.token;
+      localStorage.setItem('@App:token', response.data.token);
       localStorage.setItem('@App:user', JSON.stringify(response.data.user));
       navigate('/');
     }

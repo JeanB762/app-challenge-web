@@ -25,7 +25,7 @@ export const Login: React.FC = () => {
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    return;
   };
 
   return (

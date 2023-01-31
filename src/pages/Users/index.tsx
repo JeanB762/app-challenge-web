@@ -68,7 +68,6 @@ export const Users: React.FC = () => {
   }
 
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     setOpen(false);
   };
 
