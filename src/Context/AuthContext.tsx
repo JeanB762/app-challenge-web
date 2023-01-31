@@ -16,11 +16,15 @@ interface IContextValues {
   loggedIn: boolean;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<IContextValues>({
   loggedIn: false,
   login: async (email, senha) => {
+    return;
+  },
+  logout: async () => {
     return;
   },
   token: null,
@@ -64,8 +68,19 @@ export const AuthProvider = ({ children }: IContextProps) => {
     }
   };
 
+  const logout = async () => {
+    setUser({ email: '', name: '' });
+    setToken('');
+    api.defaults.headers.common['Authorization'] = '';
+    localStorage.setItem('@App:token', '');
+    localStorage.setItem('@App:user', '');
+    navigate('/login');
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loggedIn: !!token, login, token }}>
+    <AuthContext.Provider
+      value={{ user, loggedIn: !!token, login, logout, token }}
+    >
       {children}
     </AuthContext.Provider>
   );
